@@ -4,10 +4,12 @@ class profile::centos7_node {
     ensure=> "present",
    }
     
-   #Configuration files
-  file {"
+   #Installation file
+   file {"files/collectors/linux/vityl-collector-2.11.0-1.el7.x86_64.rpm":
+     ensure=> "present",
+     }
     
-  ensure  => present,
-    ip      => '192.168.1.131',
-  }
 }
+
+# Class Declaration
+include profile::centos7_node
