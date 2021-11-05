@@ -1,6 +1,13 @@
 class profile::centos7_node {
-  host {'db.puppet.vm':
-    ensure  => present,
+  #  Installing Collector Package
+  package { "collector":
+    ensure=> "present",
+   }
+    
+   #Configuration files
+  file {"
+    
+  ensure  => present,
     ip      => '192.168.1.131',
   }
 }
