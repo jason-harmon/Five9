@@ -24,7 +24,7 @@ class vityl-collectorinstall {
       install_options => ['/exenoui /qn /l*v install.log'],
     }
 
-    exec { 'sc config vitylcollector start= auto'
+    exec { 'sc config vitylcollector start= auto' }
     
     file { 'C:\\puppetlabs\\code\\environments\\production\\files\\guids\\' + $host + '.guid.properites':
        source => '/etc/vityl/collector/guid.properties',
