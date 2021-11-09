@@ -14,7 +14,7 @@ class vityl-collectorinstall {
     file { '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites':
        source => '/etc/vityl/collector/guid.properties',
        replace => true,
-    
+    }
   }
   
   if $osfamily == 'Windows' {
@@ -25,9 +25,10 @@ class vityl-collectorinstall {
     }
 
     exec { 'sc config vitylcollector start= auto'
-  }
-  
+    
     file { 'C:\\puppetlabs\\code\\environments\\production\\files\\guids\\' + $host + '.guid.properites':
        source => '/etc/vityl/collector/guid.properties',
        replace => true,
+    }
+  }
 }
