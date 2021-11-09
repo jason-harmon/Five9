@@ -1,4 +1,4 @@
-class vityl-collectorinstall {
+class vitylcollectorInstall {
 
   if $osfamily == 'CentOS' {
     package { 'vityl-collector-linux':
