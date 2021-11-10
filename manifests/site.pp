@@ -11,9 +11,12 @@ class vitylcollectorInstall {
       install_options => ['--install'],
     }
     
-    file { '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites':
-       source => '/etc/vityl/collector/guid.properties',
-       replace => true,
+    file { 'linuxguidreplace':
+	   # Ensure that the guid file exists on the server, if it does then replace guid on client
+       ensure => '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites', 
+	     source => '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites', 
+       path => '/etc/vityl/collector/guid.properties',
+	   replace => true,
     }
   }
   
@@ -28,8 +31,11 @@ class vitylcollectorInstall {
        command => 'sc config vitylcollector start= auto', 
     }
     
-    file { 'C:\\puppetlabs\\code\\environments\\production\\files\\guids\\' + $host + '.guid.properites':
-       source => '/etc/vityl/collector/guid.properties',
+    file { 'winguidreplace':
+	   # Ensure that the guid file exists on the server, if it does then replace guid on client
+       ensure => '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites',
+	     source => '/etc/puppetlabs/code/environments/production/files/guids/' + $host + '.guid.properites',
+	     path => 'C:/ProgramData/Vityl/Collector/guid.properites',
        replace => true,
     }
   }
