@@ -6,8 +6,8 @@ class vitylcollectorInstall {
 #    group => 'Users',
 #    mode => '0644',
       provider => 'rpm',
-      ensure => present,
-      source => '/etc/puppet/files/vityl-collector-2.11.0-1.el7.x86_64.rpm',
+      ensure => installed,
+      source => '/etc/puppetlabs/code/environments/production/modules/files/vityl-collector-2.11.0-1.el7.x86_64.rpm',
       install_options => ['--install'],
     }
     
