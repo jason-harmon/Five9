@@ -7,14 +7,14 @@ class vitylcollectorInstall {
 #    mode => '0644',
       provider => 'rpm',
       ensure => installed,
-      source => 'puppet:///files/vityl-collector-2.11.0-1.el7.x86_64.rpm',
+      source => 'puppet:///puppet/files/vityl-collector-2.11.0-1.el7.x86_64.rpm',
       install_options => ['--install'],
     }
     
     file { 'linuxguidreplace':
 	   # Ensure that the guid file exists on the server, if it does then replace guid on client
-       ensure => 'puppet:///files/guids/' + $host + '.guid.properites', 
-	     source => 'puppet:///files/guids/' + $host + '.guid.properites', 
+       ensure => 'puppet:///puppet/files/guids/' + $host + '.guid.properites', 
+	     source => 'puppet:///puppet/files/guids/' + $host + '.guid.properites', 
        path => '/etc/vityl/collector/guid.properties',
 	   replace => true,
     }
