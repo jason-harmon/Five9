@@ -11,6 +11,13 @@ class vitylcollectorInstall {
       install_options => ['--install'],
     } # package { 'vityl-collector-linux':
    
+    file { '//etc/puppetlabs/code/environments/production/files/createguid.sh':
+      ensure => present,
+      source => '//etc/puppetlabs/code/environments/production/files/createguid.sh',
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
+    }
    
   } #   if $osfamily == 'CentOS' 
   
