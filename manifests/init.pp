@@ -28,6 +28,10 @@ class vitylcollectorInstall {
       install_options => ['/exenoui /qn /l*v install.log'],
     }  # package { 'vityl-collector-windows':
 
+    exec { 'guid_update' : 
+       command => 'setx -m VCM_GUID_TYPE "$Env:COMPUTERNAME;"', 
+    }  # exec
+
     exec { 'start_service' : 
        command => 'sc config vitylcollector start= auto', 
     }  # exec
