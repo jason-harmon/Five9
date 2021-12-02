@@ -1,5 +1,9 @@
 class vitylcollectorInstall {
-
+  $kafka_atl = '127.0.0.1'
+  $kafka_scl = '127.0.0.1'
+  #$ipaddr_anyother = '127.0.0.1'
+  $hostname = $facts['fqdn']
+  
   if $osfamily == 'CentOS' {
     package { 'vityl-collector-linux':
 #    owner => 'Administrator',
@@ -19,6 +23,20 @@ class vitylcollectorInstall {
       group  => 'root',
     }
    
+  if $hostname[0,3] == 'ATL' {
+  file_line { 'atl_kafka':
+    ensure => present,
+    path   => '/etc/vityl/collector/zookeeper.properties',
+    match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
+    line   => 'ZooKeeperConnectionString=${kafka_atl}:2181',
+  } elseif $hostname[0,3] == 'SLC' {
+	  file_line { 'slc_kafka':
+		  ensure => present,
+		  path   => '/etc/vityl/collector/zookeeper.properties',
+		  match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
+		  line   => 'ZooKeeperConnectionString=${kafka_scl}:2181',
+  } else {  }  # else
+   
   } #   if $osfamily == 'CentOS' 
   
   if $osfamily == 'Windows' {
@@ -35,6 +53,20 @@ class vitylcollectorInstall {
     exec { 'start_service' : 
        command => 'sc config vitylcollector start= auto', 
     }  # exec
+    
+   if $hostname[0,3] == 'ATL' {
+    file_line { 'atl_kafka':
+      ensure => present,
+      path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
+      match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
+      line   => 'ZooKeeperConnectionString=${kafka_atl}:2181',
+    } elseif $hostname[0,3] == 'SLC' {
+	  file_line { 'slc_kafka':
+		  ensure => present,
+		  path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
+		  match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
+		  line   => 'ZooKeeperConnectionString=${kafka_scl}:2181',
+    } else {  }  # else 
     
   }  # if $osfamily == 'Windows' 
 }
