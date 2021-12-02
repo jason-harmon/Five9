@@ -11,3 +11,5 @@ EOL
 
 chmod 644 /etc/systemd/system/vityl-collector.service.d/override.conf
 chown -R root:root /etc/systemd/system/vityl-collector.service.d/override.conf
+systemctl start vityl-collector
+systemctl enable vityl-collector
