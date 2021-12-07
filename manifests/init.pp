@@ -47,7 +47,7 @@ class vitylcollectorInstall {
     }  # package { 'vityl-collector-windows':
 
     exec { 'guid_update' : 
-       command => 'setx -m VCM_GUID_TYPE "$Env:COMPUTERNAME;"', 
+       command => 'setx -m VCM_GUID_TYPE "host"', 
     }  # exec
 
     exec { 'start_service' : 
