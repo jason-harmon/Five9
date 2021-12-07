@@ -23,13 +23,13 @@ class vitylcollectorInstall {
       group  => 'root',
     }
    
-  if downcase($facts['fqdn']) =~ /atl {
+  if $hostname =~ /atl {
   file_line { 'atl_kafka':
     ensure => present,
     path   => '/etc/vityl/collector/zookeeper.properties',
     match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
     line   => 'ZooKeeperConnectionString=${kafka_atl}:2181',
-  } elseif downcase($facts['fqdn']) =~ /scl {
+  } elseif $hostname =~ /scl {
 	  file_line { 'slc_kafka':
 		  ensure => present,
 		  path   => '/etc/vityl/collector/zookeeper.properties',
@@ -54,13 +54,13 @@ class vitylcollectorInstall {
        command => 'sc config vitylcollector start= auto', 
     }  # exec
     
-   if downcase($facts['fqdn']) =~ /atl {
+   if $hostname =~ /atl {
     file_line { 'atl_kafka':
       ensure => present,
       path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
       match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
       line   => 'ZooKeeperConnectionString=${kafka_atl}:2181',
-    } elseif downcase($facts['fqdn']) =~ /scl {
+    } elseif $hostname =~ /scl {
 	  file_line { 'slc_kafka':
 		  ensure => present,
 		  path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
