@@ -69,13 +69,22 @@ class vitylcollectorInstall {
       path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
       match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
       line   => 'ZooKeeperConnectionString=${kafka_atl}:2181',
+     }
     } elseif $hostname =~ /scl {
 	  file_line { 'slc_kafka':
 		  ensure => present,
 		  path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
 		  match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
 		  line   => 'ZooKeeperConnectionString=${kafka_scl}:2181',
-    } else {  }  # else 
+          }
+    } else {  
+    	  file_line { 'no_match':
+		  ensure => present,
+		  path   => 'C:\ProgramData\Vityl\Collector\zookeeper.properties',
+		  match  => 'ZooKeeperConnectionString=127.0.0.1:2181',
+		  line   => 'ZooKeeperConnectionString=NOMATCH',
+    	  }
+    }  # else 
     
   }  # if $osfamily == 'Windows' 
 }
